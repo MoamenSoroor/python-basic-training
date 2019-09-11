@@ -1,0 +1,160 @@
+----------------------------------------------------------------------------------
+from random import choice
+>>> x = choice(['Hello, world!', [1, 2, 'e', 'e', 4]])
+-----------------------------------------------------------------------------------
+Investigating Inheritance
+If you want to find out whether a class is a subclass of another, you can use the built-in method issubclass.
+-----------------------------------------------------------------------------------
+>>> issubclass(SPAMFilter, Filter)
+True
+>>> issubclass(Filter, SPAMFilter)
+False
+-----------------------------------------------------------------------------------
+If you have a class and want to know its base classes, you can access its special attribute bases.
+
+>>> SPAMFilter.__bases__
+(<class __main__.Filter at 0x171e40>,)
+>>> Filter.__bases__
+(<class 'object'>,)
+-----------------------------------------------------------------------------------
+In a similar manner, you can check whether an object is an instance of a class by using isinstance.
+
+>>> s = SPAMFilter()
+>>> isinstance(s, SPAMFilter)
+True
+>>> isinstance(s, Filter)
+True
+>>> isinstance(s, str)
+False
+-----------------------------------------------------------------------------------
+If you just want to find out which class an object belongs to, you can use the __class__ attribute.
+
+>>> s.__class__
+<class __main__.SPAMFilter at 0x1707c0>
+
+-----------------------------------------------------------------------------------
+
+class Calculator:
+	def calculate(self, expression):
+		self.value = eval(expression)
+
+class Talker:
+	def talk(self):
+		print('Hi, my value is', self.value)
+
+class TalkingCalculator(Calculator, Talker): pass
+
+The subclass (TalkingCalculator) does nothing by itself; it inherits all its behavior from its superclasses.
+The point is that it inherits both calculate from Calculator and talk from Talker, making it a talking calculator.
+
+>>> tc = TalkingCalculator()
+>>> tc.calculate('1 + 2 * 3')
+>>> tc.talk()
+Hi, my value is 7
+-----------------------------------------------------------------------------------
+
+>>> obj.__dict__
+
+>>> hasattr(tc, 'talk')
+True
+>>> hasattr(tc, 'fnord')
+False
+-----------------------------------------------------------------------------------
+
+>>> callable(getattr(tc, 'talk', None))
+True
+>>> callable(getattr(tc, 'fnord', None))
+False
+-----------------------------------------------------------------------------------
+
+the inverse of getattr is setattr, which can be used to set the attributes of an object:
+>>> setattr(tc, 'name', 'Mr. Gumby')
+>>> tc.name
+'Mr. Gumby'
+-----------------------------------------------------------------------------------
+
+from abc import ABC, abstractmethod
+class Talker(ABC):
+	@abstractmethod
+	def talk(self):
+		pass
+-----------------------------------------------------------------------------------
+
+New Functions in This Chapter
+Function Description
+-----------------------------------------------------------------------------------
+callable(object) 
+	Determines if the object is callable (such as a function or a method)
+-----------------------------------------------------------------------------------
+getattr(object, name[, default]) 
+	Gets the value of an attribute, optionally providing a default
+-----------------------------------------------------------------------------------
+hasattr(object, name) 
+	Determines if the object has the given attribute
+-----------------------------------------------------------------------------------
+isinstance(object, class) 
+	Determines if the object is an instance of the class
+-----------------------------------------------------------------------------------
+issubclass(A, B) 
+	Determines if A is a subclass of B
+-----------------------------------------------------------------------------------
+random.choice(sequence) 
+	Chooses a random element from a nonempty sequence
+-----------------------------------------------------------------------------------
+setattr(object, name, value) 
+	Sets the given attribute of the object to value
+-----------------------------------------------------------------------------------
+type(object) 
+	Returns the type of the object
+-----------------------------------------------------------------------------------
+
+
+
+Chapter 8 Exceptions
+
+>>> raise Exception
+Traceback (most recent call last):
+File "<stdin>", line 1, in ?
+Exception
+
+>>> raise Exception('hyperdrive overload')
+Traceback (most recent call last):
+File "<stdin>", line 1, in ?
+Exception: hyperdrive overload
+
+raise ArithmeticError
+Traceback (most recent call last):
+File "<stdin>", line 1, in ?
+ArithmeticError
+
+Some Built-in Exceptions
+Class Name Description
+Exception 
+	The base class for almost all exceptions.
+AttributeError
+	 Raised when attribute reference or assignment fails.
+OSError
+	 Raised when the operating system can’t perform a task, such as a file, for
+	 example. Has several specific subclasses.
+IndexError
+	 Raised when using a nonexistent index on a sequence. Subclass of 	 LookupError.
+KeyError
+	 Raised when using a nonexistent key on a mapping. Subclass of LookupError.
+NameError 
+	Raised when a name (variable) is not found.
+SyntaxError 
+	Raised when the code is ill-formed.
+TypeError 
+	Raised when a built-in operation or function is applied to an object of the 		wrong type.
+ValueError 
+	Raised when a built-in operation or function is applied to an object with the
+	correct type but with an inappropriate value.
+ZeroDivisionError 
+	Raised when the second argument of a division or modulo operation is zero
+
+
+
+
+
+
+

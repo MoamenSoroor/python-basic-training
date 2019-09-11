@@ -1,0 +1,99 @@
+1 In general, you can tell whether something is
+callable or not with the built-in function callable.
+-------------------------------
+>>> import math
+>>> x = 1
+>>> y = math.sqrt
+>>> callable(x)
+False
+>>> callable(y)
+True
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+def fibs(num):
+result = [0, 1]
+for i in range(num-2):
+result.append(result[-2] + result[-1])
+return result
+--------------------------------------------------------------------------------
+After running this statement, you’ve basically told the interpreter how 
+to calculate Fibonacci numbers. Now
+you don’t have to worry about the details anymore. 
+You simply use the function fibs.
+--------------------------------------------------------------------------------
+>>> fibs(10)
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+>>> fibs(15)
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]
+================================================================================
+
+The following code demonstrates how to add a docstring to a function:
+--------------------------------------------------------------------------------
+def square(x):
+'Calculates the square of the number x.'
+return x * x
+--------------------------------------------------------------------------------
+
+The docstring may be accessed like this:
+--------------------------------------------------------------------------------
+>>> square.__doc__
+'Calculates the square of the number x.'
+--------------------------------------------------------------------------------
+
+Note _ _doc_ _ is a function attribute. You’ll learn a lot more about attributes in Chapter 7. the double
+underscores in the attribute name mean that this is a special attribute. special or “magic” attributes like this
+are discussed in Chapter 9.
+================================================================================
+. Functions that don’t return anything simply don’t have a return statement. Or, if they do have return
+statements, there is no value after the word return.
+--------------------------------------------------------------------------------
+def test():
+print('This is printed')
+return
+print('This is not')
+--------------------------------------------------------------------------------
+
+Here, the return statement is used simply to end the function.
+--------------------------------------------------------------------------------
+>>> x = test()
+This is printed
+--------------------------------------------------------------------------------
+
+As you can see, the second print statement is skipped. (This is a bit like using break in loops, except that you
+break out of the function.) But if test doesn’t return anything, what does x refer to? Let’s see:
+>>> x
+>>>
+Nothing there. Let’s look a bit closer.
+>>> print(x)
+None
+--------------------------------------------------------------------------------
+
+NOTE: parameters are kept in what is called a local scope. scoping 
+is discussed later in this chapter.
+Strings (and numbers and tuples) are immutable, which means 
+that you can’t modify them (that is, you can only replace them with new values). Therefore, there isn’t much to say about them as parameters. But
+consider what happens if you use a mutable data structure such as a list.
+--------------------------------------------------------------------------------
+>>> def change(n):
+... n[0] = 'Mr. Gumby'
+...
+>>> names = ['Mrs. Entity', 'Mrs. Thing']
+>>> change(names)
+>>> names
+['Mr. Gumby', 'Mrs. Thing']
+--------------------------------------------------------------------------------
+
+NOTE: in python you can't pass parameters by ref or pointer like C++ to take affect outside the function
+--------------------------------------------------------------------------------
+ keyword parameters
+>>> hello_2(greeting='Hello', name='world')
+world, Hello!
+--------------------------------------------------------------------------------
+globals
+vars
+global
+nonlocal
+
+
+
+
